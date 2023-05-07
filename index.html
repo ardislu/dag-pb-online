@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>dag-pb-online</title>
+</head>
+
+<body>
+  <p><a href="https://github.com/ipld/js-dag-pb">js-dag-pb</a> is available in the DevTools console as <code>IpldDagPb</code>. Press F12 to use it.</p>
+
+  <form>
+    <input type="file" required>
+    <button>Calculate dag-pb of file</button>
+    <p>Check DevTools console for the output.</p>
+  </form>
+
+  <script src="https://unpkg.com/@ipld/dag-pb/dist/index.min.js"></script>
+
+  <script>
+    console.table([
+      { name: 'IpldDagPb', description: 'The js-dag-pb module.' },
+      { name: 'output', description: 'The raw bytes of the selected file and the dag-pb encoding of those bytes.' }
+    ]);
+
+    document.querySelector('form').addEventListener('submit', async e => {
+      e.preventDefault();
+
+      const file = document.querySelector('input').files[0];
+      const arrayBuffer = await file.arrayBuffer();
+      const inputBytes = new Uint8Array(arrayBuffer);
+      const inputHex = [...inputBytes].map(b => b.toString(16).padStart(2, '0')).join('');
+      const outputBytes = IpldDagPb.encode({ Data: inputBytes, Links: [] });
+      const outputHex = [...outputBytes].map(b => b.toString(16).padStart(2, '0')).join('');
+      globalThis.output = {
+        inputBytes,
+        inputHex,
+        outputBytes,
+        outputHex
+      };
+      console.log(output);
+    });
+  </script>
+</body>
+
+</html>
