@@ -6,16 +6,26 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" href="data:,">
   <title>dag-pb-online</title>
+  <style>
+    body {
+      display: grid;
+      place-items: center;
+      min-block-size: 50dvb;
+      margin-block: 0;
+    }
+  </style>
 </head>
 
 <body>
-  <p><a href="https://github.com/ipld/js-dag-pb">js-dag-pb</a> is available in the DevTools console as <code>IpldDagPb</code>. Press F12 to use it.</p>
+  <div>
+    <p><a href="https://github.com/ipld/js-dag-pb">js-dag-pb</a> is available in the DevTools console as <code>IpldDagPb</code>. Press F12 to use it.</p>
 
-  <form>
-    <input type="file" required>
-    <button>Calculate dag-pb of file</button>
-    <p>Check DevTools console for the output.</p>
-  </form>
+    <form>
+      <input type="file" required>
+      <button>Calculate dag-pb of file</button>
+      <p>Check DevTools console for the output.</p>
+    </form>
+  </div>
 
   <script src="https://unpkg.com/@ipld/dag-pb/dist/index.min.js"></script>
 
